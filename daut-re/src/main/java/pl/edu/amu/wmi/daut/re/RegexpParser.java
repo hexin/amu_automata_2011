@@ -11,7 +11,7 @@ import java.util.Stack;
 
 /**
  *
- * @author kacper
+ * @author kacper_kaskow
  */
 public class RegexpParser {
 
