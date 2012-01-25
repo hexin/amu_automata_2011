@@ -11,7 +11,7 @@ import java.util.Stack;
 
 /**
  *
- * @author kacper_kaskow
+ * @author kacper
  */
 public class RegexpParser {
 
@@ -21,20 +21,22 @@ public class RegexpParser {
         String tmp = stringBuilder.toString();
         ArrayList<RegexpOperator> regexpOperators = new ArrayList<RegexpOperator>();
         Stack<Moja> regexpOperatorsStack = new Stack<Moja>();
-        List<String> Ids = null;
+        List<String> ids = null;
         String actualId = null;
 
         while (tmp.isEmpty()) {
-            Ids = manager.getOperatorsForStringPrefix(tmp);
-            if (Ids.size() == 1) {
+            ids = manager.getOperatorsForStringPrefix(tmp);
+            if (ids.size() == 1) {
 
-                actualId = Ids.get(0);
+                actualId = ids.get(0);
                 int priority = manager.getPriority(actualId);
                 List<String> separators = manager.getSeparators(actualId);
-                RegexpOperator ro = manager.getFactory(actualId).createOperator(new LinkedList<String>());
+                RegexpOperator ro = manager.getFactory(actualId).createOperator(
+                        new LinkedList<String>());
                 Moja moja = new Moja(priority, ro);
 
-                if (regexpOperatorsStack.isEmpty() || regexpOperatorsStack.peek().priority < moja.priority) {
+                if (regexpOperatorsStack.isEmpty()
+                        || regexpOperatorsStack.peek().priority < moja.priority) {
                     regexpOperatorsStack.push(moja);
                 } else if (regexpOperatorsStack.peek().priority >= moja.priority) {
                     Moja tmpMoja = regexpOperatorsStack.pop();
@@ -50,7 +52,8 @@ public class RegexpParser {
         Stack<RegexpOperatorTree> stack = new Stack<RegexpOperatorTree>();
         for (RegexpOperator ro : regexpOperators) {
             if (ro.arity() == 0) {
-                stack.push(new RegexpOperatorTree(ro, new LinkedList<RegexpOperatorTree>()));
+                stack.push(new RegexpOperatorTree(ro,
+                        new LinkedList<RegexpOperatorTree>()));
             } else {
                 LinkedList<RegexpOperatorTree> ll = new LinkedList<RegexpOperatorTree>();
                 for (int i = 0; i < ro.arity(); ++i) {
@@ -59,7 +62,6 @@ public class RegexpParser {
                 stack.push(new RegexpOperatorTree(ro, ll));
             }
         }
-        
         return stack.pop();
 
         /*RegexpOperatorTree rot1 = null, rot2 = null;
@@ -95,12 +97,13 @@ public class RegexpParser {
 
     class Moja {
 
+        int priority;
+        RegexpOperator regExpOper;
+        
         public Moja(int priority, RegexpOperator regExpOper) {
             this.priority = priority;
             this.regExpOper = regExpOper;
         }
-        int priority;
-        RegexpOperator regExpOper;
-    ;
-}
+
+    }
 }
