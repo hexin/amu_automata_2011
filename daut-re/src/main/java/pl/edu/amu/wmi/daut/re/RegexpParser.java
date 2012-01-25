@@ -45,7 +45,8 @@ public class RegexpParser {
                     regexpOperators.add(tmpMoja.getRegexpOperator());
 
                 }
-                stringBuilder = stringBuilder.delete(0,separators.get(0).length()-1);
+                stringBuilder = new StringBuilder(stringBuilder.substring(separators.get(0).length()));
+                //stringBuilder = stringBuilder.delete(0,separators.get(0).length()-1);
                 tmp = stringBuilder.toString();
             }
         }
