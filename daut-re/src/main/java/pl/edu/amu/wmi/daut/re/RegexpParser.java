@@ -11,7 +11,7 @@ import java.util.Stack;
 
 /**
  *
- * @author kacper
+ * @author kacper_kaskow
  */
 public class RegexpParser {
 
@@ -24,7 +24,7 @@ public class RegexpParser {
         List<String> ids = null;
         String actualId = null;
 
-        while (tmp.isEmpty()) {
+        while (!tmp.isEmpty()) {
             ids = manager.getOperatorsForStringPrefix(tmp);
             if (ids.size() == 1) {
 
