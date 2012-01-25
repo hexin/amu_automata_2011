@@ -11,7 +11,7 @@ import java.util.Stack;
 
 /**
  *
- * @author kacper_kaskow
+ * @author kacper
  */
 public class RegexpParser {
 
@@ -24,7 +24,7 @@ public class RegexpParser {
         List<String> ids = null;
         String actualId = null;
 
-        while (!tmp.isEmpty()) {
+        while (tmp.isEmpty()) {
             ids = manager.getOperatorsForStringPrefix(tmp);
             if (ids.size() == 1) {
 
@@ -36,17 +36,17 @@ public class RegexpParser {
                 Moja moja = new Moja(priority, ro);
 
                 if (regexpOperatorsStack.isEmpty()
-                        || regexpOperatorsStack.peek().priority < moja.priority) {
+                        || regexpOperatorsStack.peek().getPriority() < moja.getPriority()) {
                     regexpOperatorsStack.push(moja);
-                } else if (regexpOperatorsStack.peek().priority >= moja.priority) {
+                } else if (regexpOperatorsStack.peek().getPriority() >= moja.getPriority()) {
                     Moja tmpMoja = regexpOperatorsStack.pop();
-                    regexpOperators.add(tmpMoja.regExpOper);
+                    regexpOperators.add(tmpMoja.getRegexpOperator());
 
                 }
             }
         }
         while (!regexpOperatorsStack.isEmpty()) {
-            regexpOperators.add(regexpOperatorsStack.pop().regExpOper);
+            regexpOperators.add(regexpOperatorsStack.pop().getRegexpOperator());
         }
 
         Stack<RegexpOperatorTree> stack = new Stack<RegexpOperatorTree>();
@@ -97,12 +97,18 @@ public class RegexpParser {
 
     class Moja {
 
-        public int priority;
-        public RegexpOperator regExpOper;
+        private int priority;
+        private RegexpOperator regExpOper;
         public Moja(int priority, RegexpOperator regExpOper) {
             this.priority = priority;
             this.regExpOper = regExpOper;
         }
+    	public int getPriority() {
+			return priority;
+		}
 
+		public RegexpOperator getRegexpOperator() {
+			return regExpOper;
+		}
     }
 }
