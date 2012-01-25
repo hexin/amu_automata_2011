@@ -24,7 +24,7 @@ public class RegexpParser {
         List<String> ids = null;
         String actualId = null;
 
-        while (tmp.isEmpty()) {
+        while (!tmp.isEmpty()) {
             ids = manager.getOperatorsForStringPrefix(tmp);
             if (ids.size() == 1) {
 
@@ -45,8 +45,11 @@ public class RegexpParser {
                     regexpOperators.add(tmpMoja.getRegexpOperator());
 
                 }
+                stringBuilder = stringBuilder.delete(0,separators.get(0).length()-1);
+                tmp = stringBuilder.toString();
             }
         }
+
         while (!regexpOperatorsStack.isEmpty()) {
             regexpOperators.add(regexpOperatorsStack.pop().getRegexpOperator());
         }
