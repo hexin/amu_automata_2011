@@ -97,9 +97,8 @@ public class RegexpParser {
 
     class Moja {
 
-        int priority;
-        RegexpOperator regExpOper;
-        
+        public int priority;
+        public RegexpOperator regExpOper;
         public Moja(int priority, RegexpOperator regExpOper) {
             this.priority = priority;
             this.regExpOper = regExpOper;
