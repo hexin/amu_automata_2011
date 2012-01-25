@@ -36,9 +36,11 @@ public class RegexpParser {
                 Moja moja = new Moja(priority, ro);
 
                 if (regexpOperatorsStack.isEmpty()
-                        || regexpOperatorsStack.peek().getPriority() < moja.getPriority()) {
+                        || regexpOperatorsStack.peek().getPriority() < moja.
+                        getPriority()) {
                     regexpOperatorsStack.push(moja);
-                } else if (regexpOperatorsStack.peek().getPriority() >= moja.getPriority()) {
+                } else if (regexpOperatorsStack.peek().getPriority() >= moja.
+                        getPriority()) {
                     Moja tmpMoja = regexpOperatorsStack.pop();
                     regexpOperators.add(tmpMoja.getRegexpOperator());
 
@@ -99,16 +101,18 @@ public class RegexpParser {
 
         private int priority;
         private RegexpOperator regExpOper;
+
         public Moja(int priority, RegexpOperator regExpOper) {
             this.priority = priority;
             this.regExpOper = regExpOper;
         }
-    	public int getPriority() {
-			return priority;
-		}
 
-		public RegexpOperator getRegexpOperator() {
-			return regExpOper;
-		}
+        public int getPriority() {
+            return priority;
+        }
+
+        public RegexpOperator getRegexpOperator() {
+            return regExpOper;
+        }
     }
 }
